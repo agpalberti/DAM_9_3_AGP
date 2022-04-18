@@ -20,7 +20,7 @@ abstract class DAO <T,idType> (protected val c:Connection){
         val rs = metaData.getTables(null, SCHEMA, TABLE, null)
 
         // Si en rs hay resultados, borra la tabla con truncate, sino la crea
-        if (!rs.next())  truncateTable() else createTable()
+        if (rs.next())  truncateTable() else createTable()
     }
 
     fun truncateTable() {

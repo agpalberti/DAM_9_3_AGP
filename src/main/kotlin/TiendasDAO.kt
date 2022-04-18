@@ -12,7 +12,7 @@ class TiendasDAO (c: Connection):DAO<Tienda,Long>(c) {
     override val SELECT_BY_ID = "select ID_TIENDA, NOMBRE_TIENDA, DIRECCION_TIENDA from TIENDAS where ID_TIENDA =?"
     override val SELECT_ALL = "select * from TIENDAS"
     override val DELETE_SQL = "delete from TIENDAS where ID_TIENDA = ?"
-    override val UPDATE_SQL = "update TIENDAS set ID_TIENDA = ?, NOMBRE_TIENDA = ?, DIRECCION_TIENDA = ? where ID_TIENDA = ?"
+    override val UPDATE_SQL = "update TIENDAS set NOMBRE_TIENDA = ?, DIRECCION_TIENDA = ? where ID_TIENDA = ?"
 
     override fun insert(objeto: Tienda) {
         println(INSERT_SQL)
@@ -106,9 +106,9 @@ class TiendasDAO (c: Connection):DAO<Tienda,Long>(c) {
 
         try {
             c.prepareStatement(UPDATE_SQL).use { st ->
-                st.setLong(1, objeto.id)
-                st.setString(2, objeto.nombre)
-                st.setString(3, objeto.direccion)
+                st.setLong(3, objeto.id)
+                st.setString(1, objeto.nombre)
+                st.setString(2, objeto.direccion)
                 rowUpdated = st.executeUpdate() > 0
             }
             //Commit the change to the database

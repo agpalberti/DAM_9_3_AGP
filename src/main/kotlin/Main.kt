@@ -27,7 +27,7 @@ fun main() {
                 t.nombre = "Ferreteria Alberti"
                 tiendasDAO.update(t)
             }
-
+            println(tiendasDAO.selectAll())
             tiendasDAO.deleteById(1)
             println(tiendasDAO.selectAll())
 
@@ -35,7 +35,8 @@ fun main() {
                 i.nombre = "Tornillo redondo"
                 inventariosDAO.update(i)
             }
-            inventariosDAO.deleteById(10)
+            println(inventariosDAO.selectAll())
+            inventariosDAO.deleteById(101)
             println(inventariosDAO.selectAll())
         }
 
