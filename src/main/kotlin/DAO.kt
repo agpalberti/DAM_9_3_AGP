@@ -3,38 +3,15 @@ import java.sql.SQLException
 
 abstract class DAO <T,idType> (protected val c:Connection){
 
-     private companion object:SQL(){
-         override val SCHEMA: String
-             get() = TODO("Not yet implemented")
-         override val TABLE: String
-             get() = TODO("Not yet implemented")
-         override val TRUNCATE_TABLE_SQL: String
-             get() = TODO("Not yet implemented")
-         override val CREATE_TABLE_SQL: String
-             get() = TODO("Not yet implemented")
-         override val INSERT_SQL: String
-             get() = TODO("Not yet implemented")
-         override val SELECT_BY_ID: String
-             get() = TODO("Not yet implemented")
-         override val SELECT_ALL: String
-             get() = TODO("Not yet implemented")
-         override val DELETE_SQL: String
-             get() = TODO("Not yet implemented")
-         override val UPDATE_SQL: String
-             get() = TODO("Not yet implemented")
-     }
-
-    abstract class SQL{
-        protected abstract val SCHEMA:String
-        protected abstract val TABLE:String
-        protected abstract val TRUNCATE_TABLE_SQL:String
-        protected abstract val CREATE_TABLE_SQL:String
-        protected abstract val INSERT_SQL:String
-        protected abstract val SELECT_BY_ID:String
-        protected abstract val SELECT_ALL:String
-        protected abstract val DELETE_SQL:String
-        protected abstract val UPDATE_SQL:String
-    }
+    protected abstract val SCHEMA:String
+    protected abstract val TABLE:String
+    protected abstract val TRUNCATE_TABLE_SQL:String
+    protected abstract val CREATE_TABLE_SQL:String
+    protected abstract val INSERT_SQL:String
+    protected abstract val SELECT_BY_ID:String
+    protected abstract val SELECT_ALL:String
+    protected abstract val DELETE_SQL:String
+    protected abstract val UPDATE_SQL:String
 
     fun prepareTable() {
         val metaData = c.metaData
@@ -92,7 +69,6 @@ abstract class DAO <T,idType> (protected val c:Connection){
             }
         }
     }
-
 
     abstract fun insert(objeto:T)
     abstract fun selectAll():List<T>

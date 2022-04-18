@@ -1,1 +1,1 @@
-data class Tienda(val id:Long, val nombre:String, val direccion:String)
+data class Tienda(val id:Long, var nombre:String, val direccion:String)

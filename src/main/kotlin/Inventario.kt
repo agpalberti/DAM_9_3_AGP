@@ -1,1 +1,3 @@
-data class Inventario(val ID_ARTICULO:Long, val NOMBRE:String, val COMENTARIO:String, val PRECIO:Double, val ID_TIENDA:Int)
+data class Inventario(val id_articulo:Long, var nombre:String, val comentario:String, val precio:Double, val id_tienda:Long){
+
+}
