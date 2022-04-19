@@ -1,14 +1,16 @@
 import java.sql.Connection
 import java.sql.SQLException
 
-class TiendasDAO (c: Connection):DAO<Tienda,Long>(c) {
+/*Clase con las herramientas para utilizar la tabla tiendas. Hereda de DAO*/
+class TiendasDAO(c: Connection) : DAO<Tienda, Long>(c) {
 
     override val SCHEMA = "default"
     override val TABLE = "TIENDAS"
     override val TRUNCATE_TABLE_SQL = "TRUNCATE TABLE TIENDAS"
     override val CREATE_TABLE_SQL =
         "CREATE TABLE TIENDAS (ID_TIENDA NUMBER(10,0) CONSTRAINT PK_ID_TIENDA PRIMARY KEY, NOMBRE_TIENDA VARCHAR2(40), DIRECCION_TIENDA VARCHAR2(200) )"
-    override val INSERT_SQL = "INSERT INTO TIENDAS" + "  (ID_TIENDA, NOMBRE_TIENDA, DIRECCION_TIENDA) VALUES " + " (?, ?, ?)"
+    override val INSERT_SQL =
+        "INSERT INTO TIENDAS" + "  (ID_TIENDA, NOMBRE_TIENDA, DIRECCION_TIENDA) VALUES " + " (?, ?, ?)"
     override val SELECT_BY_ID = "select ID_TIENDA, NOMBRE_TIENDA, DIRECCION_TIENDA from TIENDAS where ID_TIENDA =?"
     override val SELECT_ALL = "select * from TIENDAS"
     override val DELETE_SQL = "delete from TIENDAS where ID_TIENDA = ?"
@@ -49,7 +51,7 @@ class TiendasDAO (c: Connection):DAO<Tienda,Long>(c) {
                 while (rs.next()) {
                     val nombre = rs.getString("NOMBRE_TIENDA")
                     val direccion = rs.getString("DIRECCION_TIENDA")
-                    tienda = Tienda(id,nombre,direccion)
+                    tienda = Tienda(id, nombre, direccion)
                 }
             }
 
@@ -75,7 +77,7 @@ class TiendasDAO (c: Connection):DAO<Tienda,Long>(c) {
                     val id = rs.getLong("ID_TIENDA")
                     val nombre = rs.getString("NOMBRE_TIENDA")
                     val direccion = rs.getString("DIRECCION_TIENDA")
-                    tiendas.add(Tienda(id,nombre,direccion))
+                    tiendas.add(Tienda(id, nombre, direccion))
                 }
             }
 

@@ -1,26 +1,28 @@
 import java.sql.Connection
 import java.sql.SQLException
 
-abstract class DAO <T,idType> (protected val c:Connection){
+/*Clase que establece la estructura de un DAO, con algunos métodos ya establecidos
+* Hay que introducirle el tipo de la tabla de la que se quiere hacer el DAO y el tipo del ID que usa. */
+abstract class DAO<T, idType>(protected val c: Connection) {
 
-    protected abstract val SCHEMA:String
-    protected abstract val TABLE:String
-    protected abstract val TRUNCATE_TABLE_SQL:String
-    protected abstract val CREATE_TABLE_SQL:String
-    protected abstract val INSERT_SQL:String
-    protected abstract val SELECT_BY_ID:String
-    protected abstract val SELECT_ALL:String
-    protected abstract val DELETE_SQL:String
-    protected abstract val UPDATE_SQL:String
+    protected abstract val SCHEMA: String
+    protected abstract val TABLE: String
+    protected abstract val TRUNCATE_TABLE_SQL: String
+    protected abstract val CREATE_TABLE_SQL: String
+    protected abstract val INSERT_SQL: String
+    protected abstract val SELECT_BY_ID: String
+    protected abstract val SELECT_ALL: String
+    protected abstract val DELETE_SQL: String
+    protected abstract val UPDATE_SQL: String
 
-    fun prepareTable() {
+    open fun prepareTable() {
         val metaData = c.metaData
 
         // Consulto en el esquema (Catalogo) la existencia de la TABLE
         val rs = metaData.getTables(null, SCHEMA, TABLE, null)
 
         // Si en rs hay resultados, borra la tabla con truncate, sino la crea
-        if (rs.next())  truncateTable() else createTable()
+        if (rs.next()) truncateTable() else createTable()
     }
 
     fun truncateTable() {
@@ -70,9 +72,9 @@ abstract class DAO <T,idType> (protected val c:Connection){
         }
     }
 
-    abstract fun insert(objeto:T)
-    abstract fun selectAll():List<T>
-    abstract fun selectById(id:idType):T?
-    abstract fun update(objeto: T):Boolean
-    abstract fun deleteById(id:idType):Boolean
+    abstract fun insert(objeto: T)
+    abstract fun selectAll(): List<T>
+    abstract fun selectById(id: idType): T?
+    abstract fun update(objeto: T): Boolean
+    abstract fun deleteById(id: idType): Boolean
 }
